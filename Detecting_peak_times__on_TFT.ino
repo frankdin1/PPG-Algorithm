@@ -1,5 +1,5 @@
 /*
- * Code written by Frank Din for UTA Senior Design Project
+ * Code written by Frank Din for UTA Senior Design
  * */
  #include <TFT.h>  // Arduino LCD library
  #include <SPI.h>
