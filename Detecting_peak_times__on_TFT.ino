@@ -68,7 +68,7 @@ void setup(){//the entire code in this loop will only happen 1 time
       }
     }
     
-  while(j<11){
+  while(j<11){//the entire code within the while loop repeats until we get 10 values in peaktArr
     //replace the values of the 1st column with those of the 2nd column
     pAndt[0][0] = pAndt[0][1];//replace the values in row 1
     pAndt[1][0] = pAndt[1][1];//replace the values in row 2
@@ -95,6 +95,27 @@ void setup(){//the entire code in this loop will only happen 1 time
     }
      for(i = 0; i < 10; i++){
         inst_f = inst_f + (1/tdiff[i]);//convert the time differences to frequencies and take their sum
+    }
+ 
+    screen.background(0,0,255);
+    screen.setCursor(0,0);//the 1st value in brackets sets the distance from the left edge of the screen, and the 2nd value sets the distance from the top edge of the screen
+    screen.print("Heart rate ");
+    screen.setCursor(0,20);
+    screen.print((inst_f/10)*60);
+    screen.setCursor(75,20);
+    screen.println(" bpm");
+
+    
+    //unsigned long displayTime = millis();
+    //while(millis() - displayTime <=5000){ // The waveform will display for 5 seconds 
+    while(xPos<=160){
+    int sensor = analogRead(A0); 
+    int graphHeight = map(sensor,0,682,5,screen.height()/1.5);
+    screen.stroke(255,255,255);
+    screen.line(xPos, (screen.height() - graphHeight), xPos, screen.height() - graphHeight+3); //screen.height() - graphHeight + 5 affects the thickness of the line. The bigger the number you add to screen.height() - graphHeight is, the thicker the line will be
+    xPos++;
+    delayTime = millis();
+    while(millis() - delayTime<=25){//refresh rate
     }
 }
 
@@ -145,7 +166,6 @@ void loop(){
     int sensor = analogRead(A0); 
     int graphHeight = map(sensor,0,682,5,screen.height()/1.5);
     screen.stroke(255,255,255);
-    //xPos*2 causes the waveform to reach the end of the screen after 5 s
     screen.line(xPos, (screen.height() - graphHeight), xPos, screen.height() - graphHeight+3); //screen.height() - graphHeight + 5 affects the thickness of the line. The bigger the number you add to screen.height() - graphHeight is, the thicker the line will be
     xPos++;
     unsigned long delayTime = millis();
@@ -155,6 +175,6 @@ void loop(){
   screen.background(0,0,255);//1st value is blue, 2nd value is green and 3rd value is red
   screen.print("Calculating..");
   unsigned long delayTime = millis();
-  //while (millis()- delayTime <= ){
-  //}
+  while (millis()- delayTime <= 5000){
+  }
 }
